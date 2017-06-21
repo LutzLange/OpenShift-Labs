@@ -1,10 +1,18 @@
 = Manage your Container with Red Hat OpenShift 
 Dennis Deitermann <dennis@redhat.com>, Daniel Messer <dmesser@redhat.com>, Lutz Lange <llange@redhat.com>
+:doctype: article
+:reproducible:
+:icons: font
 :iconsdir: /etc/asciidoc/images/icons
 :numbered:
-:icons:
+:sectlinks:
+:sectnums:
 :toc: left
+:toclevels: 3
 :tabsize: 8
+:numbered:
+:source-highlighter: rouge
+:experimental:
 
 == OpenShift Introduction Lab
 
@@ -69,7 +77,7 @@ To obtain you gateway ip adress https://www.opentlc.com/pc-status/index.php[logi
 Login into the status page with your user `luXX` and your password `Frank_XX_furt`. Please use the lab number on http://192.168.103.200/dokuwiki/doku.php[this side] in the lower left as `XX`.
 
 ----
-[user@localhost ~]$ ssh rhpet@<your gateway VM ip adress>
+[user@localhost ~]$ ssh lu<your lab id>@<your gateway VM ip adress>
 
 The authenticity of host '85.190.180.158 (85.190.180.158)' can't be established.
 ECDSA key fingerprint is SHA256:bsDGeuXiG1zpM3RlsN+RlaAPRaDSi6Y/sJoBP2IXNqU.
@@ -124,7 +132,7 @@ Password for the Proxy is: `r3dh4t1!`
 | andrew  | r3dh4t1! | Developer/User
 |=== 
 
-=== Introduction into the CLI of OpenShift
+=== [Optional] Introduction into the CLI of OpenShift
 
 With the OpenShift Container Platform command line interface (CLI), you can create applications and manage OpenShift Container Platform projects from a terminal. The CLI is ideal in situations where you are:
 
@@ -313,7 +321,7 @@ router-1-xq3r6             1/1       Running   7          22d       192.168.0.10
 As you can see, all infrastructure pods are running on the infranode, because we configured a default node selector for this.
 Please look https://blog.openshift.com/deploying-applications-to-specific-nodes/[here] for more information.
 
-=== [ Optional ] Check Registry
+=== [Optional] Check Registry
 
 In this lab scenario, infranode is the target for both the registry and the default router.
 
@@ -398,7 +406,7 @@ router-1-xq3r6             1/1       Running   12         28d       192.168.0.10
 As you can see, all infrastructure pods are running on the infranode, because we configured a default node selector for this.
 Please look https://blog.openshift.com/deploying-applications-to-specific-nodes/[here] for more information.
 
-=== [ Optional ] Resource Management Lab
+=== [Optional] Resource Management Lab
 
 In this lab, you learn how to manage OpenShift Container Platform resources.
 
@@ -974,7 +982,7 @@ Delete the object in the `hello-many-pods.json` definition file:
 
 (Optional) Create a project, set the quota with a pod value of `10`, and run `hello-many-pods.json`.
 
-==== [ Optional ] Create Services and Routes
+==== [Optional] Create Services and Routes
 
 As `andrew`, create a project called `scvslab`:
 
@@ -1097,7 +1105,7 @@ Test that your service is working:
 Hello OpenShift!
 ----
 
-==== Explore Containers and Routes
+==== [Optional] Explore Containers and Routes
 
 Next, take a look at the route and registry containers.
 
@@ -1322,7 +1330,7 @@ deploymentconfig "hello-openshift" scaled
 ----
 +
 ----
-[root@master ~]# oc rhs router-1-xq3r6
+[root@master ~]# oc rsh router-1-xq3r6
 ----
 +
 ----
@@ -1919,7 +1927,7 @@ This example is, in effect, a "quick start" -- a predefined application that com
 . Create the template object in the shared `openshift` project. This is also referred to as _uploading_ the template.
 +
 ----
-[root@master ~]# oc create -f Template_Example.json -n openshift
+[root@master ~]# oc create -f Template_Example.yml -n openshift
 
 template "a-quickstart-keyvalue-application" created
 ----
@@ -2034,7 +2042,7 @@ Alternatively, create the template instance from the command line:
 ----
 [root@master ~]# su - marina
 ----
-+
+Be sure that you login as marina in OpenShift with `oc login -u marina https://master.example.com:8443` if you get an error message.
 ----
 [marina@master ~]$ oc project templates
 ----
@@ -3859,7 +3867,7 @@ This is done using JSON file describing the topology of your OpenShift deploymen
 
 For this purpose, create the file topology.json with the following content:
 [source,json]
-.topology.yml
+.topology.json
 ----
 {
     "clusters": [
@@ -4110,7 +4118,7 @@ We will store this encoded value in an OpenShift secret.
 +
 . Create a file called `cns-secret.yml` as per below:
 +
-[source,yaml]
+[source,xml]
 .cns-secret.yml
 ----
 apiVersion: v1
